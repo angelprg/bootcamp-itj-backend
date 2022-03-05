@@ -1,0 +1,28 @@
+{
+  "name": "bootcamp-itj-backend",
+  "version": "1.0.0",
+  "description": "Project for the Fullstack bootcamp at ITJ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelprg/bootcamp-itj-backend.git"
+  },
+  "keywords": [
+    "blog",
+    "itj"
+  ],
+  "author": "ITJ Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/angelprg/bootcamp-itj-backend/issues"
+  },
+  "homepage": "https://github.com/angelprg/bootcamp-itj-backend#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
