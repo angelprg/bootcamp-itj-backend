@@ -1,34 +1,61 @@
+const Post = require("../models/post");
 
-const listPosts = (req, res) => {
-    res.json([{ title: "First post", imagenUrl: "",}]);
-}
+const listPosts = async (req, res) => {
+  const posts = await Post.find().lean().exec();
+  res.json(posts);
+};
 
-const getPost = (req, res) => {
-    res.json({ title: "Single post", imagenUrl: "",});
-}
+const getPost = async (req, res) => {
+  const { id } = req.params;
+  const post = await Post.findById(id).lean().exec();
 
-const savePost = (req, res) => {
-    const newPost = req.body;
-    console.log(req.body);
-    res.status(201).json(newPost);
-}
+  if (post) {
+    res.json(post);
+  } else {
+    res.status(404).send();
+  }
+};
 
-const updatePost = (req, res) => {
-    const {id}  = req.params;
-    const post = req.body;
-    res.json({id, ...post});
-}
+const savePost = async (req, res) => {
+  const post = req.body;
+  const newPost = new Post(post);
+  await newPost.save();
+  res.status(201).json(newPost);
+};
 
-const deletePost = (req, res) => {
-    const {id}  = req.params;
-    console.log("Delete post with ID: ", id);
-    res.status(204).json();
-}
+const updatePost = async (req, res) => {
+  const { id } = req.params;
+  const post = req.body;
+
+  const updatedPost = await Post.findByIdAndUpdate(id, post, {
+    returnDocument: "after",
+  })
+    .lean()
+    .exec();
+
+  if (updatedPost) {
+    res.json(updatedPost);
+  } else {
+    res.status(404).send();
+  }
+};
+
+const deletePost = async (req, res) => {
+  const { id } = req.params;
+
+  const deletedPost = await Post.findByIdAndDelete(id).exec();
+
+  if (deletedPost) {
+    res.status(204).send();
+  } else {
+    res.status(404).send();
+  }
+};
 
 module.exports = {
-    listPosts,
-    getPost,
-    savePost,
-    updatePost,
-    deletePost,
-}
+  listPosts,
+  getPost,
+  savePost,
+  updatePost,
+  deletePost,
+};
