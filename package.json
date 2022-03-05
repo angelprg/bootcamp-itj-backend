@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/angelprg/bootcamp-itj-backend#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
